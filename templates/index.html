@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Air Quality Index Prediction</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body class="bg-dark">
+        <!-- Navbar -->
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container">
+                <span class="navbar-brand mb-0 h1">Air Quality Index Predictor Project</span>
+                <span class="navbar-brand mb-0 h1">Ramanujan College, University of Delhi</span>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img
+                                src="https://cdn3.iconfinder.com/data/icons/weather-solid-daily-forecast/512/PM2.5-512.png"
+                                class="rounded img-fluid"
+                                alt="intro-img"
+                                width="75%"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h1 class="display-5">
+                            AQI Prediction using<br />
+                            Machine Learning
+                        </h1>
+                        <p class="lead">Air Pollution is Rising!</p>
+                        <p>
+                            Although mostly invisible to the naked eye, the air we breathe is full of tiny particles of chemicals, soil, smoke, dust or allergens, also known as particulate matter, or PM. High PM poses a risk to human health and the planet as a whole. <br>Necessary precautions must be taken to mitigate the harmful effects of the PM. This project predicts Air Quality Index of Delhi so that precautions can be taken in advance. <br>After all, prevention is better than cure!</p>
+                        <hr class="my-4" />
+                        <p>Predicting Pollution Levels using various Machine Learning algorithms.</p>
+                        <p>
+                            <span class="badge badge-primary">Linear Regression</span>,
+                            <span class="badge badge-warning">Lasso Regression</span>,
+                            <span class="badge badge-success">Random Forest Regressor</span>,
+                            <span class="badge badge-danger">etc</span>,
+                        </p>
+                        <hr class="my-4" />
+                        <p>
+                            Developed by <strong>Toseef Ali Khan</strong>, <strong>Pavan Gandhi</strong> and
+                            <strong>Manish Arora</strong>.
+                        </p>
+                    </div>
+                </div>
+                <hr />
+                <!-- Row Ends -->
+
+                <!--T Average Temperature (°C)
+                TM Maximum temperature (°C)
+                Tm Minimum temperature (°C)
+                SLP Atmospheric pressure at sea level (hPa)
+                H Average relative humidity (%)
+                PP Total rainfall and / or snowmelt (mm)
+                VV Average visibility (Km)
+                V Average wind speed (Km/h)
+                VM Maximum sustained wind speed (Km/h) -->
+
+                <div class="row my-4">
+                    <div class="col-md-6">
+                        <h3>Input Form</h3>
+                        <form method="POST" , action="/">
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Average Temperature (°C)"
+                                        name="T"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Maximum Temperature (°C)"
+                                        name="TM"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-4">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Min Temp (°C)"
+                                        name="Tm"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-8">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Atmospheric pressure at sea level (hPa)"
+                                        name="SLP"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Average relative humidity (%)"
+                                        name="H"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-7">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Avg visibility (Km)"
+                                        name="VV"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-5">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Avg wind speed (Km/h)"
+                                        name="V"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-9">
+                                    <input
+                                        type="text"
+                                        class="form-control my-1"
+                                        placeholder="Maximum sustained wind speed (Km/h)"
+                                        name="VM"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-primary my-1 btn-block">Predict</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h3>Prediction based on Model</h3>
+                        {% if lr_pm %} {% if lr_pm < 51 %}
+                        <h4 class="text text-success">
+                            Predicted value of PM<sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, GOOD
+                        </h4>
+                        {% elif lr_pm < 101 %}
+                        <h4 class="text text-info">
+                            Predicted value of PM<sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, MODERATE
+                        </h4>
+                        {% elif lr_pm < 151 %}
+                        <h4 class="text text-primary">
+                            Predicted value of PM<sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, UNHEALTHY FOR KIDS
+                        </h4>
+                        {% elif lr_pm < 201 %}
+                        <h4 class="text text-warning">
+                            Predicted value of PM<sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, UNHEALTHY
+                        </h4>
+                        {% elif lr_pm < 301 %}
+                        <h4 class="text text-danger">
+                            Predicted value of PM<sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, VERY UNHEALTHY
+                        </h4>
+                        {% else %}
+                        <h4 class="text text-danger">
+                            Predicted value of PM<sub>2.5</sub> is {{ lr_pm[0] }} μg/m3, HAZARDOUS
+                        </h4>
+                        {% endif %} {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="sticky-footer" class="py-4 bg-dark text-center text-white-50">
+            <h4>Developed and Presented By</h4>
+            <div class="d-flex justify-content-center container text-center text-white">
+                <h4><a href="https://github.com/toseefkhan403/" target="_blank">Toseef Ali Khan |</a></h4>
+                <h4>
+                    <a href="https://github.com/iampavangandhi/" target="_blank">| Pavan Gandhi | </a>
+                </h4>
+                <h4><a href="https://github.com/Manisharora8600" target="_blank">| Manish Arora </a></h4>
+            </div>
+        </footer>
+    </body>
+</html>
