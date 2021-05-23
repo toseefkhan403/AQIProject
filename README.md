@@ -8,4 +8,5 @@ After all, prevention is better than cure!
 The steps include: importing and cleaning the data, visualizing the features, implementing ML algorithms, evaluating the models and deploying the best model in a web service.
 
 Dataset:
-* [AQI Data](https://en.tutiempo.net/climate/ws-421810.html)
+* [Weather Data](https://en.tutiempo.net/climate/ws-421810.html)
+* [PM 2.5 Data](https://aqicn.org/data-platform/register/)
