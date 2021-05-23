@@ -4,7 +4,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-lr = joblib.load("Models/linear_regression_model.pkl")
+lr = joblib.load("Models/decision_forest_regression_model.pkl")
 
 @app.route("/")
 def home():
