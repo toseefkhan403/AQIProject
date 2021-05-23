@@ -3,18 +3,16 @@
 ## Roadmap for the project
 
 * Get the data
-    - Daily Air quality data for all months (on day to day basis) for the past 10 years.
+    - Daily weather data for all months (on day to day basis) for the past 10 years.
     - Get PM2.5 values too.
+    - Merge the datasets.
 * Research about the key factors for determining the PM2.5 Values.
     - Accordingly remove the unwanted features from the dataset.
 * Data Cleaning / Wrangling
 * Exploratory Data Analysis.
-    - Trend in PM2.5 levels?
-    - Season's impact on air quality.
-    - Odd / Even ?
-    - Effect of any green drives during these 10 years?
+    - Trend in PM2.5 levels
 * Applying different algorithms.
 * Error Analysis.
 * Use the best algorithm for pkl model.
-* Make a flask + firebase webApp.
+* Make a flask webapp.
 * (Optional)Deploy.
